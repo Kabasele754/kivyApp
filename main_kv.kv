@@ -1,0 +1,84 @@
+#: import screen_home libs.uix.subclass.screen_home
+#: import screen_map libs.uix.subclass.screen_map
+
+MDScreen:
+    MDBoxLayout:
+        orientation: "vertical"
+        MDToolbar:
+            title: "MY App"
+            left_action_items: [['menu', lambda x: nav_drawer.set_state("open")  ]]
+        # Mon Gestionaire d'ecran
+        ScreenManager:
+            id: screen_manager
+            ScreenHome:
+                name: "home"
+            ScreenMap:
+                name: "maps"
+            Screen:
+                name: "image"
+                MDLabel:
+                    text: "image"
+
+    MDNavigationDrawer:
+        id: nav_drawer
+        opening_transition: "out_bounce"
+        opening_time: 2
+
+        BoxLayout:
+            orientation: "vertical"
+            padding: "10dp"
+            spacing: "8dp"
+
+            AnchorLayout:
+                anchor_x: "left"
+                size_hint_y: None
+                height: avatar.height
+
+                Image:
+                    id: avatar
+                    size_hint: None, None
+                    size: dp(270), dp(200)
+                    source: "enfant1.jpg"
+            MDLabel:
+                text: "KivyMD library"
+                font_style: "Button"
+                adaptive_height: True
+            ScrollView:
+                DrawerList:
+                    OneLineIconListItem:
+                        text:"Dossier"
+                    OneLineIconListItem:
+                        text:"Home"
+                        IconLeftWidget:
+                            icon: "home"
+                    OneLineIconListItem:
+                        text:"Maps"
+                        on_release: nav_drawer.set_state("close"); screen_manager.current = "maps"
+                        IconLeftWidget:
+                            icon: "google-maps"
+                    OneLineIconListItem:
+                        text:"Gallery"
+                        IconLeftWidget:
+                            icon: "image"
+                    OneLineIconListItem:
+                        text:"Video"
+                        IconLeftWidget:
+                            icon: "video"
+                    OneLineIconListItem:
+                        text:"User"
+                        IconLeftWidget:
+                            icon: "account"
+                    OneLineIconListItem:
+                        text:"Dossier"
+                        IconLeftWidget:
+                            icon: "folder"
+                    OneLineIconListItem:
+                        text:"Navigateur"
+                        IconLeftWidget:
+                            icon: "navigation"
+                    OneLineIconListItem:
+                        text:"Réveil"
+                        IconLeftWidget:
+                            icon: "clock"
+
+
